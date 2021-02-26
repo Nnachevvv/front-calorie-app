@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import {Link } from "react-router-dom";
+
 import axios from "axios";
 import {
   Card,
@@ -30,18 +32,10 @@ class Login extends Component {
   };
 
   onSubmit = () => {
-    console.log("tuk", this.state.task);
-    let {task}  = this.state;
-    console.log(this.state)
+    const task  = this.state
     if (task) {
-      console.log(this.state)
-
       axios
-        .post(
-          endpoint + "/api/task",
-          {
-            task,
-          },
+        .post(endpoint + "/api/task",task,
           {
             headers: {
               "Content-Type": "application/x-www-form-urlencoded",
@@ -52,7 +46,6 @@ class Login extends Component {
           this.setState({
             task: "",
           });
-          console.log(res);
 
         });
     }
@@ -101,10 +94,15 @@ class Login extends Component {
             />
         </div>
         <Button color='teal' content='Login' icon='unlock' labelPosition='left' onClick={this.onSubmit} />
-
+      
         <div className="row">
           <Card.Group>{this.state.items}</Card.Group>
         </div>
+
+
+        <Link to="/Register"><Button>
+              Go to Page 2 
+        </Button></Link>
       </div>
     );
   }
